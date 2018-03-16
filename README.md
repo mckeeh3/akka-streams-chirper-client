@@ -4,11 +4,12 @@ This project is a demonstration project that introduces some of the features of
 [Akka Streams](https://doc.akka.io/docs/akka/current/stream/index.html?language=java)
 and [Akka HTTP](https://doc.akka.io/docs/akka-http/current/index.html?language=java).
 
-The project contains three runnable source files,
-`ChirperClientSimulator` and `ChirperHistoryWebSocket`, and `ChirperLiveWebSocket`.
-`ChirperClientSimulator` simulates the activities of a Chirper application client.
-`ChirperHistoryWebSocket` reads all of the current chirp history via a web-socket.
-`ChirperLiveWebSocket` opens a web-socket and reads chirps as they are created.
+There are three runnable source files,
+`ChirperClientSimulator`, `ChirperHistoryWebSocket`, and `ChirperLiveWebSocket`.
+* `ChirperClientSimulator` Simulates the activities of a Chirper application client.
+It creates users, add user friends, and randomly creates chirps.
+* `ChirperHistoryWebSocket` Reads all of the current chirp history via a web-socket.
+* `ChirperLiveWebSocket` Opens a web-socket and reads chirps as they are created.
 
 This project requires that the Chirper application is running in the background when you run any one or all of these
 sample programs.
@@ -45,8 +46,11 @@ This will create some Chirper users, add some friends to each user, and then it 
 You may stop or continue to run `ChirperClientSimulator` before the next step. However, the Chirper app must be running in the
 background.
 
-Now that some users, friends, and chirps have been created you can both `ChirperHistoryWebSocket`, and `ChirperLiveWebSocket`.
-To run `ChirperHistoryWebSocket`.
+__Note:__ `ChirperClientSimulator` will continue to run until you hit the Enter key in the terminal window.
+
+Now that some users, friends, and chirps have been created you can run `ChirperHistoryWebSocket` and `ChirperLiveWebSocket`.
+
+Run `ChirperHistoryWebSocket`.
 ~~~~
 cd akka-streams-chirper-client
 mvn compile exec:java@history
@@ -57,4 +61,4 @@ cd akka-streams-chirper-client
 mvn compile exec:java@live
 ~~~~
 
-__Note:__ `ChirperLiveWebSocket` will continue to run until hit the Enter key in the terminal window.
+__Note:__ `ChirperLiveWebSocket` will continue to run until you hit the Enter key in the terminal window.
