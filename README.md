@@ -1,6 +1,6 @@
 # Akk Streams Chirper Client
 
-This is a demonstration project that introduces some of the features of
+This project is a demonstration project that introduces some of the features of
 [Akka Streams](https://doc.akka.io/docs/akka/current/stream/index.html?language=java)
 and [Akka HTTP](https://doc.akka.io/docs/akka-http/current/index.html?language=java).
 
@@ -23,7 +23,7 @@ git clone https://github.com/mckeeh3/akka-streams-chirper-client.git
 
 ## Execution
 
-These steps are done via command windows and assume that you are running a bash compatable shell. You may want to open
+These steps are done via command windows and assume that you are running a bash compatible shell. You may want to open
 3 command windows so that you can run all three executables in parallel.
 
 Run the Chirper application.
@@ -35,9 +35,9 @@ mvn lagom:runAll
 Once the Chirper application is running run the `ChirperClientSimulator`.
 ~~~~
 cd akka-streams-chirper-client
-mvn exec:java@producer
+mvn compile exec:java@producer
 ~~~~
-This will create some Chirper users, add some friends to each user, and then it will create a continous series of random user chirps.
+This will create some Chirper users, add some friends to each user, and then it will create a continuous series of random user chirps.
 
 You can run or stop the `ChirperClientSimulator` before the next step. However, the Chirper app must be running in the
 background.
@@ -45,8 +45,7 @@ background.
 Now that some users, friends, and chirps have been created you can run `ChirperWebSocketExamples`.
 ~~~~
 cd akka-streams-chirper-client
-mvn exec:java@streamer
+mvn compile exec:java@streamer
 ~~~~
 
-Note that to terminate both programs hit the Enter key in the terminal window.
- 
+__Note:__ to terminate both programs hit the Enter key in the terminal window.
