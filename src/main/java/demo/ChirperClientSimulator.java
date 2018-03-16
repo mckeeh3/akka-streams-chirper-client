@@ -207,7 +207,7 @@ class ChirperClientSimulator {
     }
 
     private void randomChirps() {
-        final FiniteDuration tickInterval = FiniteDuration.create(5, TimeUnit.SECONDS);
+        final FiniteDuration tickInterval = FiniteDuration.create(1, TimeUnit.SECONDS);
         final Source<String, Cancellable> ticker = Source.tick(tickInterval, tickInterval, "tick");
         ticker.runForeach(t -> chirp(randomChirp()), actorMaterializer);
     }

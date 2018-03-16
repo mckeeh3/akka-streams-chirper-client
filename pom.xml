@@ -58,7 +58,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>demo.ChirperWebSocketExamples</mainClass>
+                    <mainClass>demo.ChirperHistoryWebSocket</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -76,12 +76,21 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>streamer</id>
+                        <id>history</id>
                         <goals>
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>demo.ChirperWebSocketExamples</mainClass>
+                            <mainClass>demo.ChirperHistoryWebSocket</mainClass>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>live</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>demo.ChirperLiveWebSocket</mainClass>
                         </configuration>
                     </execution>
                 </executions>
