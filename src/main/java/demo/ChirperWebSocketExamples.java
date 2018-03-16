@@ -28,8 +28,8 @@ public class ChirperWebSocketExamples {
     }
 
     private void run() throws IOException {
-//        userActivityHistory("lela");
-//        userActivityHistory("obiWan");
+        userActivityHistory("lela");
+        userActivityHistory("obiWan");
 
         userActivityLiveStream("luke");
         userActivityLiveStream("han");
