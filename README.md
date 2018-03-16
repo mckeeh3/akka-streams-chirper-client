@@ -1,4 +1,4 @@
-# Akk Streams Chirper Client
+# Akka Streams Chirper Client
 
 This project is a demonstration project that introduces some of the features of
 [Akka Streams](https://doc.akka.io/docs/akka/current/stream/index.html?language=java)
