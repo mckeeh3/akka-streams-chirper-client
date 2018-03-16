@@ -38,6 +38,7 @@ public class ChirperWebSocketExamples {
         System.in.read();
         System.out.println("Stopping actor system...");
         actorSystem.terminate();
+        System.exit(0);
     }
 
     private void userActivityHistory(String userId) {
