@@ -21,6 +21,11 @@ git clone https://github.com/lagom/lagom-java-chirper-example.git
 git clone https://github.com/mckeeh3/akka-streams-chirper-client.git
 ~~~~
 
+## Execution
+
+These steps are done via command windows and assume that you are running a bash compatable shell. You may want to open
+3 command windows so that you can run all three executables in parallel.
+
 Run the Chirper application.
 ~~~~
 cd lagom-java-chirper-example
@@ -33,3 +38,15 @@ cd akka-streams-chirper-client
 mvn exec:java@producer
 ~~~~
 This will create some Chirper users, add some friends to each user, and then it will create a continous series of random user chirps.
+
+You can run or stop the `ChirperClientSimulator` before the next step. However, the Chirper app must be running in the
+background.
+
+Now that some users, friends, and chirps have been created you can run `ChirperWebSocketExamples`.
+~~~~
+cd akka-streams-chirper-client
+mvn exec:java@streamer
+~~~~
+
+Note that to terminate both programs hit the Enter key in the terminal window.
+ 
