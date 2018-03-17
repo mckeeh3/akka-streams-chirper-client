@@ -77,8 +77,8 @@ public class ChirperLiveWebSocket {
                     }
                 });
 
-        connected.thenAccept(done -> System.out.println(String.format("Connected to history stream for user %s", userId)));
-        closed.thenAccept(done -> System.out.println(String.format("Closed history stream for user %s", userId)));
+        connected.thenAccept(done -> System.out.println(String.format("Connected to live stream for user %s", userId)));
+        closed.thenAccept(done -> System.out.println(String.format("Closed live stream for user %s", userId)));
     }
 
     private Flow<Message, Entity.Chirp, NotUsed> messageToChirpFlow() {
