@@ -6,7 +6,6 @@ import akka.actor.ActorSystem;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.model.StatusCodes;
 import akka.http.javadsl.model.ws.Message;
-import akka.http.javadsl.model.ws.TextMessage;
 import akka.http.javadsl.model.ws.WebSocketRequest;
 import akka.http.javadsl.model.ws.WebSocketUpgradeResponse;
 import akka.japi.Pair;
@@ -46,14 +45,10 @@ public class ChirperLiveWebSocket {
     }
 
     private void userActivityLiveStream(String userId) {
-        final ObjectMapper objectMapper = new ObjectMapper();
-        final ObjectReader readChirp = objectMapper.readerFor(Entity.Chirp.class);
-
         final Sink<Message, CompletionStage<Done>> sink =
-                Sink.foreach(message -> {
-                    final Entity.Chirp chirp = readChirp.readValue(message.asTextMessage().getStrictText());
-                    System.out.println(String.format("Live(%s): %s", userId, chirp));
-                });
+                messageToChirpFlow().toMat(
+                        Sink.foreach(chirp -> System.out.println(String.format("Live(%s): %s", userId, chirp))), Keep.right()
+                );
 
         final Flow<Message, Message, CompletableFuture<Optional<Message>>> flow =
                 Flow.fromSinkAndSourceMat(
@@ -82,5 +77,15 @@ public class ChirperLiveWebSocket {
 
         connected.thenAccept(done -> System.out.println(String.format("Connected to history stream for user %s", userId)));
         closed.thenAccept(done -> System.out.println(String.format("Closed history stream for user %s", userId)));
+    }
+
+    private static Flow<Message, Entity.Chirp, NotUsed> messageToChirpFlow() {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        final ObjectReader readChirp = objectMapper.readerFor(Entity.Chirp.class);
+
+        final Flow<Message, String, NotUsed> messageToString = Flow.of(Message.class).map(message -> message.asTextMessage().getStrictText());
+        final Flow<String, Entity.Chirp, NotUsed> jsonToChirp = Flow.of(String.class).map(readChirp::<Entity.Chirp>readValue);
+
+        return messageToString.via(jsonToChirp);
     }
 }
