@@ -26,6 +26,8 @@ public class ChirperLiveWebSocket {
     private final ActorSystem actorSystem = ActorSystem.create();
     private final ActorMaterializer actorMaterializer = ActorMaterializer.create(actorSystem);
     private final Http http = Http.get(actorSystem);
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectReader readChirp = objectMapper.readerFor(Entity.Chirp.class);
 
     public static void main(String[] args) throws IOException {
         new ChirperLiveWebSocket().run();
@@ -79,10 +81,7 @@ public class ChirperLiveWebSocket {
         closed.thenAccept(done -> System.out.println(String.format("Closed history stream for user %s", userId)));
     }
 
-    private static Flow<Message, Entity.Chirp, NotUsed> messageToChirpFlow() {
-        final ObjectMapper objectMapper = new ObjectMapper();
-        final ObjectReader readChirp = objectMapper.readerFor(Entity.Chirp.class);
-
+    private Flow<Message, Entity.Chirp, NotUsed> messageToChirpFlow() {
         final Flow<Message, String, NotUsed> messageToString = Flow.of(Message.class).map(message -> message.asTextMessage().getStrictText());
         final Flow<String, Entity.Chirp, NotUsed> jsonToChirp = Flow.of(String.class).map(readChirp::<Entity.Chirp>readValue);
 
